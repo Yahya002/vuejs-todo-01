@@ -27,7 +27,6 @@ export default {
         const edited_task = ref(props.task);
 
         function save(){
-            console.log(edited_task.value);
             emit('taskCreated', edited_task.value); // distinguish this from the edit
             emit('closeCreateEdit');
         }
@@ -37,7 +36,7 @@ export default {
         }
 
         onMounted(() => {
-            // console.log(props.id, props.title, task.id, task.title);
+            console.log(props.task, edited_task.value);
         })
 
         return {

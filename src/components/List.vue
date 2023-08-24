@@ -37,14 +37,13 @@ export default{
         there seems to be an issue because the mouse event is being passed as an argument.
         figure that out and then make sure the right props are being passed to the task item.
       */
-      console.log(id)
       if (id != 0){
         preset_task.value = list.value.find((object) => object.id = id);
-        console.log("id is set:", id, preset_task);
       }
       else {
-        preset_task.value = {id: 0, title: '', is_completed: false};
+        // figure out how to reset the preset_task without breaking reactivity.
       }
+      console.log("id is:", id, preset_task);
       showCreateEdit.value = !showCreateEdit.value;
     }
 
