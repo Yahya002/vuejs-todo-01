@@ -1,7 +1,8 @@
 <template>
 
     <div class="taskCard" @mouseenter="toggleShowOptions" @mouseleave="toggleShowOptions">
-        <h3 class="taskTitle">{{ title }}</h3>
+        <i v-if="!task.is_completed" class="fa-solid fa-checkmark" />
+        <h3 class="taskTitle">{{ task.title }}</h3>
         <div v-if="showOptions">
             <i class="fa-solid fa-pen icon" @click="edit"></i><i class="fa-solid fa-xmark icon"  @click="remove"></i>
         </div>
@@ -15,6 +16,10 @@ import { ref } from 'vue';
 export default{
     name: 'TaskItem',
     setup(props, { emit }){
+        
+        // defineProps({
+        //     task: Object,
+        // })
 
         const showOptions = ref(false);
 
@@ -23,23 +28,21 @@ export default{
         }
 
         function edit(){
-            emit('taskEdited', this.id)
+            console.log("should emit edit")
+            // emit('taskEdited', this.id)
         }
         function remove(){
-            emit('taskDeleted', this.id)
+            emit('taskDeleted', props.task.id)
         }
 
         return {
             edit,
             remove,
             showOptions,
-            toggleShowOptions
+            toggleShowOptions,
         }
     },
-    props: {
-        id: Number,
-        title: String,
-    }
+    props: ['task']
 }
 </script>
 

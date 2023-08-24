@@ -1,12 +1,11 @@
 <template>
 <div class="backdrop" @click.self="close">
     <div class="modal">
-        {{ task.title }}
         <input 
         class="task-input" 
         placeholder="enter task" 
-        v-bind:value="task.title"
-        @input="event => task.title = event.target.value"
+        v-bind:value="edited_task.title"
+        @input="event => edited_task.title = event.target.value"
         >
         <button @click="save">save</button>
     </div>
@@ -20,17 +19,16 @@
 -->
 
 <script>
-import { onMounted, reactive } from 'vue';
+import { onMounted, ref } from 'vue';
 
 export default {
     setup(props, { emit }){
-        const task = reactive({
-            id: props.id,
-            title: props.title
-        })
+
+        const edited_task = ref(props.task);
 
         function save(){
-            emit('taskCreated', task); // distinguish this from the edit
+            console.log(edited_task.value);
+            emit('taskCreated', edited_task.value); // distinguish this from the edit
             emit('closeCreateEdit');
         }
 
@@ -39,20 +37,16 @@ export default {
         }
 
         onMounted(() => {
-            console.log(props.id, props.title, task.id, task.title);
+            // console.log(props.id, props.title, task.id, task.title);
         })
 
         return {
             save,
             close,
-            task
+            edited_task
         }
     },
-
-    props: {
-        id: Number,
-        title: String,
-    },
+    props: ['task']
 }
 </script>
 
