@@ -1,4 +1,5 @@
 <template>
+
   <div class="list">
     <TaskItem 
     v-for="task in list" 
@@ -7,6 +8,7 @@
     @taskDeleted="(id) => deleteTask(id)"
     />
   </div>
+
   <div v-if="showCreateEdit">
     <CreateEdit
     :task="preset_task"
@@ -14,13 +16,21 @@
     @taskCreated="addTask"
     />
   </div>
+
   <div @click="toggleCreateEdit(0)" class="add-button">+ New Task</div>
+
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, reactive } from 'vue';
 import TaskItem from './TaskItem.vue';
 import CreateEdit from './CreateEdit.vue';
+
+export class Task {
+  id = 0;
+  title = '';
+  is_completed = false;
+}
 
 export default{
   name: 'List',
@@ -29,7 +39,7 @@ export default{
     const id_ctr = ref(0);
 
     const showCreateEdit = ref(false);
-    const preset_task = {id: 0, title: '', is_completed: false};
+    const preset_task = reactive({id: 0, title: '', is_completed: false});
 
     function toggleCreateEdit(id = 0){
 
@@ -37,13 +47,15 @@ export default{
         there seems to be an issue because the mouse event is being passed as an argument.
         figure that out and then make sure the right props are being passed to the task item.
       */
+
       if (id != 0){
         preset_task.value = list.value.find((object) => object.id = id);
+        console.log(id);
       }
       else {
         // figure out how to reset the preset_task without breaking reactivity.
       }
-      console.log("id is:", id, preset_task);
+      // console.log("id is:", id, preset_task);
       showCreateEdit.value = !showCreateEdit.value;
     }
 
@@ -56,12 +68,11 @@ export default{
     }
     
     function deleteTask(id){
-      list.value.splice(list.value.findIndex((object) => object.id = id), 1);
+      let i = list.value.findIndex(object => object.id === id);
+      list.value.splice(i, 1);
     }
-    onMounted(() => {
-      // console.log(list);
-      // console.log(list.value.find);
-    })
+    
+    onMounted(() => {})
 
     return {
       list,

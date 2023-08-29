@@ -1,11 +1,12 @@
 <template>
+    
 <div class="backdrop" @click.self="close">
     <div class="modal">
         <input 
         class="task-input" 
         placeholder="enter task" 
-        v-bind:value="edited_task.title"
-        @input="event => edited_task.title = event.target.value"
+        v-bind:value="task.title"
+        @input="event => new_task.title = event.target.value"
         >
         <button @click="save">save</button>
     </div>
@@ -20,14 +21,15 @@
 
 <script>
 import { onMounted, ref } from 'vue';
+import { Task } from './List.vue';
 
 export default {
     setup(props, { emit }){
 
-        const edited_task = ref(props.task);
+        const new_task = ref(new Task);
 
         function save(){
-            emit('taskCreated', edited_task.value); // distinguish this from the edit
+            emit('taskCreated', new_task.value); // distinguish this from the edit
             emit('closeCreateEdit');
         }
 
@@ -36,13 +38,14 @@ export default {
         }
 
         onMounted(() => {
-            console.log(props.task, edited_task.value);
+            // console.log("the passed task is: ", props.task);
         })
 
         return {
             save,
             close,
-            edited_task
+            task: props.task,
+            new_task
         }
     },
     props: ['task']

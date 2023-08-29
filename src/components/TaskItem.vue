@@ -16,10 +16,6 @@ import { ref } from 'vue';
 export default{
     name: 'TaskItem',
     setup(props, { emit }){
-        
-        // defineProps({
-        //     task: Object,
-        // })
 
         const showOptions = ref(false);
 
@@ -31,7 +27,7 @@ export default{
             console.log("should emit edit")
             // emit('taskEdited', this.id)
         }
-        function remove(){
+        function remove(){  
             emit('taskDeleted', props.task.id)
         }
 
