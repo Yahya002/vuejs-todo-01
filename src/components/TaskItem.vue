@@ -47,8 +47,9 @@ export default{
     max-width: 90%;
     margin: 0.5em auto;
 
-    border: 2px solid #8e81f3;
-    border-radius: 5px;
+    border-top: 3px solid #8e81f3;
+    border-radius: 1px;
+    
 }
 
 .taskTitle {
