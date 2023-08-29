@@ -1,12 +1,11 @@
 <template>
-    
+
 <div class="backdrop" @click.self="close">
     <div class="modal">
         <input 
         class="task-input" 
         placeholder="enter task" 
-        v-bind:value="task.title"
-        @input="event => new_task.title = event.target.value"
+        v-model=" new_task.title "
         >
         <button @click="save">save</button>
     </div>
@@ -29,7 +28,7 @@ export default {
         const new_task = ref(new Task);
 
         function save(){
-            emit('taskCreated', new_task.value); // distinguish this from the edit
+            emit('taskCreated', new_task.value);
             emit('closeCreateEdit');
         }
 
@@ -38,7 +37,9 @@ export default {
         }
 
         onMounted(() => {
-            // console.log("the passed task is: ", props.task);
+            if (props.task.id != 0){
+                new_task.value = props.task;
+            }
         })
 
         return {
@@ -95,6 +96,7 @@ export default {
     outline: none;
     color: white;
     border-radius: 2px;
+
 }
 
 </style>

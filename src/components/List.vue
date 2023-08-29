@@ -43,19 +43,23 @@ export default{
 
     function toggleCreateEdit(id = 0){
 
-      /*
-        there seems to be an issue because the mouse event is being passed as an argument.
-        figure that out and then make sure the right props are being passed to the task item.
-      */
-
       if (id != 0){
-        preset_task.value = list.value.find((object) => object.id = id);
-        console.log(id);
+
+        let t = list.value.find(object => object.id === id);
+        preset_task.id = t.id;
+        preset_task.title = t.title;
+        preset_task.is_completed = t.is_completed;
+
       }
       else {
-        // figure out how to reset the preset_task without breaking reactivity.
+
+        // is there a better way to write this? review 'reactive'
+        preset_task.id = 0;
+        preset_task.title = '';
+        preset_task.is_completed = false;
+
       }
-      // console.log("id is:", id, preset_task);
+
       showCreateEdit.value = !showCreateEdit.value;
     }
 
@@ -64,6 +68,8 @@ export default{
         id_ctr.value++;
         task.id = id_ctr.value;
         list.value.push(task);
+      } else {
+        list.value.find(object => object.id === task.id).title = task.title;
       }
     }
     
@@ -103,6 +109,7 @@ export default{
 
   background-color: aliceblue;
   border-radius: 2px;
+
 }
 
 .add-button{
@@ -118,5 +125,6 @@ export default{
   color:white;
   background-color: #8e81f3;
   border-radius: 30px;
+
 }
 </style>

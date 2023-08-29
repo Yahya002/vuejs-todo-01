@@ -24,8 +24,7 @@ export default{
         }
 
         function edit(){
-            console.log("should emit edit")
-            // emit('taskEdited', this.id)
+            emit('taskEdited', props.task.id)
         }
         function remove(){  
             emit('taskDeleted', props.task.id)
