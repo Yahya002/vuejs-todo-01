@@ -99,13 +99,12 @@ export default{
 <style>
 
 .list {
-  
+
   max-width: 90%;
   margin: 1em auto;
   padding: 0.5em 0;
 
-  overflow: scroll;
-  overflow-x: hidden;
+  overflow: hidden; /* Hide scrollbars */
 
   background-color: aliceblue;
   border-radius: 2px;

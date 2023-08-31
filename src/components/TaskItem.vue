@@ -38,6 +38,7 @@ export default{
         }
     },
     props: ['task']
+
 }
 </script>
 
@@ -45,22 +46,27 @@ export default{
 .taskCard {
     
     max-width: 90%;
-    margin: 0.5em auto;
+    margin: 0.3em auto;
 
     border-top: 3px solid #8e81f3;
     border-radius: 1px;
     
 }
 
-.taskTitle {
+.taskTitle {    
+
+    font-size: x-large;
 
     text-align: left;
-    margin: 0.5em 1em;
+    margin: 0 0.5em;
 
     overflow: hidden;
+
 }
 
 .icon {
+
     margin-left: 1em;
+    
 }
 </style>
